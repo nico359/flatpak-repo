@@ -1,0 +1,83 @@
+{
+    "id" : "io.github.nico359.loci",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "50",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command" : "loci",
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri"
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ],
+        "env" : {
+            "RUST_BACKTRACE" : "1"
+        }
+    },
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "protobuf-c",
+            "buildsystem" : "autotools",
+            "config-opts" : [
+                "--disable-protoc"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://github.com/protobuf-c/protobuf-c/releases/download/v1.5.2/protobuf-c-1.5.2.tar.gz",
+                    "sha256" : "e2c86271873a79c92b58fef7ebf8de1aa0df4738347a8bd5d4e65a80a16d0d24"
+                }
+            ]
+        },
+        {
+            "name" : "libshumate",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Ddemos=false",
+                "-Dgtk_doc=false",
+                "-Dvapi=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://download.gnome.org/sources/libshumate/1.6/libshumate-1.6.1.tar.xz",
+                    "sha256" : "b36aad34500791785f546684d0f2ed644e4819ff4e85ae67a2245f159eccb2d4"
+                }
+            ]
+        },
+        {
+            "name" : "loci",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dbuildtype=release"
+            ],
+            "sources" : [
+                {
+                    "type" : "dir",
+                    "path" : "."
+                }
+            ]
+        }
+    ]
+}
