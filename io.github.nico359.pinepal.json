@@ -46,8 +46,9 @@
             "config-opts" : ["-Dbuildtype=release"],
             "sources" : [
                 {
-                    "type" : "dir",
-                    "path" : "."
+                    "type" : "git",
+                    "url" : "https://github.com/nico359/pinepal.git",
+                    "tag" : "v0.3.1"
                 }
             ]
         }

@@ -74,8 +74,9 @@
             ],
             "sources" : [
                 {
-                    "type" : "dir",
-                    "path" : "."
+                    "type" : "git",
+                    "url" : "https://github.com/nico359/loci.git",
+                    "tag" : "v0.1.1"
                 }
             ]
         }
