@@ -1,8 +1,6 @@
  name: Flatter
  
  on:
-   schedule:
-     - cron: "0 0 * * *"  # rebuild daily
    workflow_dispatch:
  
  jobs:
