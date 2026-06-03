@@ -43,7 +43,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/expenses.git",
-                    "tag" : "v1.3.0"
+                    "tag" : "v1.3.1"
                 }
             ]
         }
