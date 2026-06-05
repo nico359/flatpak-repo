@@ -14,7 +14,7 @@
   <project_license>MIT</project_license>
   
   <url type="homepage">https://github.com/brandonp2412/Flexify</url>
-  <url type="vcs-browser">https://github.com/brandonp2412/Flexifyl</url>
+  <url type="vcs-browser">https://github.com/brandonp2412/Flexify</url>
   <url type="bugtracker">https://github.com/brandonp2412/Flexify/issues</url>
   
   <supports>
@@ -66,12 +66,10 @@
       </description>
     </release>
   <release version="2.1.48" date="2025-12-18">
-    <p>Initial release</p>
-        <ul>
-          <li>Initial flatpak release</li>
-        </ul>
-    </description>
-  </release>
+      <description translate="no">
+        <p>Initial flatpak release</p>
+      </description>
+    </release>
 </releases>
 
 </component>
