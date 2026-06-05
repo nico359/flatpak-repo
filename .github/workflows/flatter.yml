@@ -24,12 +24,15 @@
        - name: Install build dependencies
          run: dnf install -y unzip
 
-       - name: Install Freedesktop 25.08 runtime
+       - name: Install additional runtimes
          run: |
            flatpak install -y flathub \
              org.freedesktop.Platform//25.08 \
              org.freedesktop.Sdk//25.08 \
-             org.freedesktop.Sdk.Extension.llvm21//25.08
+             org.freedesktop.Sdk.Extension.llvm21//25.08 \
+             org.electronjs.Electron2.BaseApp//25.08 \
+             org.gnome.Platform//50 \
+             org.gnome.Sdk//50
 
        - name: Setup GPG
          if: ${{ github.triggering_actor == github.repository_owner }}
@@ -49,6 +52,7 @@
              io.github.nico359.simplesync.json
              io.github.nico359.speedometer.json
              io.github.brandonp2412.flexify/io.github.brandonp2412.flexify.yml
+             com.tutanota.Tutanota/com.tutanota.Tutanota.json
            arch: ${{ matrix.arch }}
            gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
            upload-bundles: true
