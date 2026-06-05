@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.brandonp2412.flexify</id>
+  <content_rating type="oars-1.0" />
+  
+  <name>Flexify</name>
+  <summary>Track your gym progress and flex on people </summary>
+  
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  
+  <description>
+    <p>
+      Flex on people with this swanky, lightning-quick gym tracker! Flutter app mainly for use on mobile Linux devices e.g. Pinephone.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">io.github.brandonp2412.flexify.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/brandonp2412/Flexify/blob/main/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/brandonp2412/Flexify/blob/main/fastlane/metadata/android/en-US/images/phoneScreenshots/5_en-US.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/brandonp2412/Flexify/blob/main/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.png</image>
+    </screenshot>
+  </screenshots>
+  
+  <url type="homepage">https://github.com//brandonp2412/Flexify</url>
+  <url type="bugtracker">https://github.com/brandonp2412/Flexify/issues</url>
+  
+  <developer id="com.github.brandonp2412">
+  <name>Brandon Dick</name>
+</developer>
+
+<releases>
+  <release version="2.1.48" date="2025-12-18">
+    <url type="details">https://github.com/brandonp2412/Flexify/releases/tag/2.1.48</url>
+    <description>
+      <p>Initial Flatpak release</p>
+    </description>
+  </release>
+</releases>
+
+</component>

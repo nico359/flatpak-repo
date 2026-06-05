@@ -21,6 +21,13 @@
        - name: Checkout
          uses: actions/checkout@v4
  
+       - name: Install Freedesktop 25.08 runtime
+         run: |
+           flatpak install -y flathub \
+             org.freedesktop.Platform//25.08 \
+             org.freedesktop.Sdk//25.08 \
+             org.freedesktop.Sdk.Extension.llvm21//25.08
+
        - name: Setup GPG
          if: ${{ github.triggering_actor == github.repository_owner }}
          id: gpg
@@ -38,6 +45,7 @@
              io.github.nico359.pinepal.json
              io.github.nico359.simplesync.json
              io.github.nico359.speedometer.json
+             io.github.brandonp2412.flexify/io.github.brandonp2412.flexify.yml
            arch: ${{ matrix.arch }}
            gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
            upload-bundles: true
