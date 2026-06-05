@@ -80,7 +80,7 @@
         }
       ],
       "build-commands": [
-        "tar -xf tutanota-unpacked-linux.tar.gz",
+        "tar --no-same-owner -xf tutanota-unpacked-linux.tar.gz",
         "rm tutanota-unpacked-linux.tar.gz",
         "[ -d linux-arm64-unpacked ] && mv linux-arm64-unpacked linux-unpacked || true",
         "mkdir -p /app/lib/",
