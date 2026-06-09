@@ -19,6 +19,10 @@ Apps not created by me:
 See the release section for the .flatpakrepo file https://github.com/nico359/flatpak-repo/releases
 Please note that the description of the .flatpakrepo file might not always be up to date so take a look at the section above or the manifests itself to see which apps are included.
 
+Alternatively you can also download the individual .flatpak bundles. Please keep in mind that they will not be automatically updated though.
+To get a bundle you can go to the Actions tab https://github.com/nico359/flatpak-repo/actions and select the latest workflow run. Then scroll down a little bit to Artifacts and select the app and architecture you want.
+You have to extract them first because they are uploaded as .zip file. Then you can install the .flatpak bundle.
+
 ## Credits
 
 The Flatpak repo itself is built with a Flatter workflow so thanks a lot to Andy Holmes for creating this project https://github.com/andyholmes/flatter
