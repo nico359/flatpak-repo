@@ -48,7 +48,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/pinepal.git",
-                    "tag" : "v0.3.1"
+                    "tag" : "v0.3.2"
                 }
             ]
         }
