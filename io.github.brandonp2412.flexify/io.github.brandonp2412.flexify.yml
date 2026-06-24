@@ -40,11 +40,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/brandonp2412/Flexify.git
-        tag: 2.1.82
-        commit: 5c9ee5ee1d424ee4532a1fd504cd7b0c225e19cd
+        tag: 2.1.83
+        commit: 62f77f61a6a572c6c69b74d6561f475bb6e34b57
       - generated/sources/pubspec.json
       - type: dir
         path: sources
       - generated/sources/pubspec.json
     modules:
-      - generated/modules/flutter-sdk-3.41.6.json
+      - generated/modules/flutter-sdk-3.44.1.json
