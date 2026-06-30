@@ -1,75 +1,172 @@
- name: Flatter
- 
- on:
-   workflow_dispatch:
- 
- jobs:
-   flatter:
-     name: Flatter (${{ matrix.arch }})
-     runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
-     container:
-       image: ghcr.io/andyholmes/flatter/gnome-rust:49
-       options: --privileged
- 
-     strategy:
-       matrix:
-         arch: [x86_64, aarch64]
-       fail-fast: false
-       max-parallel: 1
- 
-     steps:
-       - name: Checkout
-         uses: actions/checkout@v4
- 
-       - name: Install build dependencies
-         run: dnf install -y unzip
+name: Flatter
 
-       - name: Install additional runtimes
-         run: |
-           flatpak install -y flathub \
-             org.freedesktop.Platform//25.08 \
-             org.freedesktop.Sdk//25.08 \
-             org.freedesktop.Sdk.Extension.llvm21//25.08 \
-             org.electronjs.Electron2.BaseApp//25.08 \
-             org.gnome.Platform//50 \
-             org.gnome.Sdk//50
+on:
+  workflow_dispatch:
+    inputs:
+      apps:
+        description: 'Apps to build (comma-separated: expenses,loci,pinepal,simplesync,speedometer,flexify,tutanota or "all")'
+        required: true
+        type: string
+        default: 'all'
 
-       - name: Setup GPG
-         if: ${{ github.triggering_actor == github.repository_owner }}
-         id: gpg
-         uses: crazy-max/ghaction-import-gpg@v6
-         with:
-           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-           passphrase: ${{ secrets.GPG_PASSPHRASE }}
- 
-       - name: Build
-         uses: andyholmes/flatter@main
-         with:
-           files: |
-             io.github.nico359.expenses.json
-             io.github.nico359.loci.json
-             io.github.nico359.pinepal.json
-             io.github.nico359.simplesync.json
-             io.github.nico359.speedometer.json
-             io.github.brandonp2412.flexify/io.github.brandonp2412.flexify.yml
-             com.tutanota.Tutanota/com.tutanota.Tutanota.json
-           arch: ${{ matrix.arch }}
-           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
-           upload-bundles: true
-           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
- 
-   deploy:
-     name: Deploy
-     runs-on: ubuntu-latest
-     needs: flatter
-     permissions:
-       pages: write
-       id-token: write
-     environment:
-       name: github-pages
-       url: ${{ steps.deployment.outputs.page_url }}
- 
-     steps:
-       - name: GitHub Pages
-         id: deployment
-         uses: actions/deploy-pages@v4
+jobs:
+  matrix:
+    name: Select apps
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.set.outputs.files }}
+      need-gnome: ${{ steps.set.outputs.need-gnome }}
+      need-freedesktop: ${{ steps.set.outputs.need-freedesktop }}
+      need-llvm21: ${{ steps.set.outputs.need-llvm21 }}
+      need-electron: ${{ steps.set.outputs.need-electron }}
+    steps:
+      - id: set
+        run: |
+          get_path() {
+            case "$1" in
+              expenses)    echo 'io.github.nico359.expenses.json' ;;
+              loci)        echo 'io.github.nico359.loci.json' ;;
+              pinepal)     echo 'io.github.nico359.pinepal.json' ;;
+              simplesync)  echo 'io.github.nico359.simplesync.json' ;;
+              speedometer) echo 'io.github.nico359.speedometer.json' ;;
+              flexify)     echo 'io.github.brandonp2412.flexify/io.github.brandonp2412.flexify.yml' ;;
+              tutanota)    echo 'com.tutanota.Tutanota/com.tutanota.Tutanota.json' ;;
+            esac
+          }
+
+          INPUT="${{ inputs.apps }}"
+          ALL="expenses loci pinepal simplesync speedometer flexify tutanota"
+
+          if [ "${INPUT}" = "all" ]; then
+            NAMES="${ALL}"
+          else
+            NAMES="${INPUT//,/ }"
+          fi
+
+          NEED_GNOME=false
+          NEED_FREEDESKTOP=false
+          NEED_LLVM21=false
+          NEED_ELECTRON=false
+
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          for name in ${NAMES}; do
+            path=$(get_path "${name}")
+            if [ -n "${path}" ]; then
+              echo "${path}" >> $GITHUB_OUTPUT
+            fi
+            case "${name}" in
+              expenses|loci|pinepal|simplesync|speedometer)
+                NEED_GNOME=true ;;
+              flexify)
+                NEED_FREEDESKTOP=true
+                NEED_LLVM21=true ;;
+              tutanota)
+                NEED_FREEDESKTOP=true
+                NEED_LLVM21=true
+                NEED_ELECTRON=true ;;
+            esac
+          done
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "need-gnome=${NEED_GNOME}" >> $GITHUB_OUTPUT
+          echo "need-freedesktop=${NEED_FREEDESKTOP}" >> $GITHUB_OUTPUT
+          echo "need-llvm21=${NEED_LLVM21}" >> $GITHUB_OUTPUT
+          echo "need-electron=${NEED_ELECTRON}" >> $GITHUB_OUTPUT
+
+  flatter:
+    name: Flatter (${{ matrix.arch }})
+    needs: matrix
+    runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
+    container:
+      image: ghcr.io/andyholmes/flatter/gnome-rust:49
+      options: --privileged
+
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64]
+      fail-fast: false
+      max-parallel: 1
+
+    steps:
+      - name: Checkout manifests
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: dnf install -y unzip
+
+      - name: Seed repo from gh-pages
+        id: seed
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: repo
+        continue-on-error: true
+
+      - name: Clean gh-pages git metadata
+        if: ${{ steps.seed.outcome == 'success' }}
+        run: rm -rf repo/.git
+
+      - name: Init repo if missing
+        if: ${{ steps.seed.outcome != 'success' }}
+        run: |
+          mkdir -p repo
+          ostree --repo=repo init --mode=archive
+
+      - name: Install GNOME runtimes
+        if: ${{ needs.matrix.outputs.need-gnome == 'true' }}
+        run: |
+          flatpak install -y flathub \
+            org.gnome.Platform//50 \
+            org.gnome.Sdk//50
+
+      - name: Install Freedesktop runtimes
+        if: ${{ needs.matrix.outputs.need-freedesktop == 'true' }}
+        run: |
+          flatpak install -y flathub \
+            org.freedesktop.Platform//25.08 \
+            org.freedesktop.Sdk//25.08
+
+      - name: Install LLVM21 extension
+        if: ${{ needs.matrix.outputs.need-llvm21 == 'true' }}
+        run: |
+          flatpak install -y flathub \
+            org.freedesktop.Sdk.Extension.llvm21//25.08
+
+      - name: Install Electron base app
+        if: ${{ needs.matrix.outputs.need-electron == 'true' }}
+        run: |
+          flatpak install -y flathub \
+            org.electronjs.Electron2.BaseApp//25.08
+
+      - name: Setup GPG
+        if: ${{ github.triggering_actor == github.repository_owner }}
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Build
+        uses: andyholmes/flatter@main
+        with:
+          files: ${{ needs.matrix.outputs.files }}
+          arch: ${{ matrix.arch }}
+          gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+          upload-bundles: true
+          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: flatter
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
