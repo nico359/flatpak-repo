@@ -77,6 +77,8 @@ jobs:
     name: Flatter (${{ matrix.arch }})
     needs: matrix
     runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
+    permissions:
+      contents: write
     container:
       image: ghcr.io/andyholmes/flatter/gnome-rust:49
       options: --privileged
@@ -94,15 +96,15 @@ jobs:
       - name: Install build dependencies
         run: dnf install -y unzip
 
-      - name: Seed repo from gh-pages
+      - name: Seed repo from cache branch
         id: seed
         uses: actions/checkout@v4
         with:
-          ref: gh-pages
+          ref: repo-cache
           path: repo
         continue-on-error: true
 
-      - name: Clean gh-pages git metadata
+      - name: Clean git metadata
         if: ${{ steps.seed.outcome == 'success' }}
         run: rm -rf repo/.git
 
@@ -154,6 +156,16 @@ jobs:
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+
+      - name: Push repo cache
+        if: ${{ matrix.arch == 'aarch64' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: repo
+          publish_branch: repo-cache
+          force_orphan: true
+          enable_jekyll: false
 
   deploy:
     name: Deploy
