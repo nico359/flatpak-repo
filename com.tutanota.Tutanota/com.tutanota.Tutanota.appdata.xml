@@ -73,6 +73,29 @@
   </supports>
     
     <releases>
+      <release version="355.260731.0" date="2026-07-31">
+        <description>
+	  <p>
+	    Not an official release but the tag exists in the commit history. Therefore the x86_64 version is also behind compared to the arm64 one for this release.
+	  </p>
+        </description>
+      </release>
+      <release version="355.260710.0" date="2026-07-14">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-355.260710.0
+	  </p>
+        </description>
+      </release>
+      <release version="353.260630.0" date="2026-07-02">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-353.260630.0
+	  </p>
+        </description>
+      </release>
       <release version="352.260618.0" date="2026-06-22">
         <description>
 	  <p>
