@@ -2858,8 +2858,8 @@
         "only-arches": [
             "x86_64"
         ],
-        "url": "https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-3.3.1/libsqlite3.x64.linux.so",
-        "sha256": "148c51687ac3be3487873845690ddbf3d8ee099a5521a193c856008907fb7361",
+        "url": "https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-3.3.4/libsqlite3.x64.linux.so",
+        "sha256": "e184f6ba2b7a3440e272df64c6d038de5c7b1a997b7c2f9341164602f9bdf024",
         "dest": "./.dart_tool/hooks_runner/shared/sqlite3/build/download-static",
         "dest-filename": "libsqlite3.so"
     },
@@ -2868,8 +2868,8 @@
         "only-arches": [
             "aarch64"
         ],
-        "url": "https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-3.3.1/libsqlite3.arm64.linux.so",
-        "sha256": "0541443d38cd79160f6262e6a59892657d640459fef8acdd1f4f29a4ed0d2612",
+        "url": "https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-3.3.4/libsqlite3.arm64.linux.so",
+        "sha256": "6fc3ba520ddda02abfe655d1ed744a44aff5cd1193d43568a02a1150cd2f47ba",
         "dest": "./.dart_tool/hooks_runner/shared/sqlite3/build/download-static",
         "dest-filename": "libsqlite3.so"
     },
