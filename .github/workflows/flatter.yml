@@ -159,6 +159,10 @@ jobs:
           upload-bundles: true
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
 
+      - name: Prune old versions
+        if: ${{ matrix.arch == 'aarch64' }}
+        run: ostree prune --repo=repo --refs-only --depth=2
+
       - name: Push repo cache
         if: ${{ matrix.arch == 'aarch64' }}
         uses: peaceiris/actions-gh-pages@v3
