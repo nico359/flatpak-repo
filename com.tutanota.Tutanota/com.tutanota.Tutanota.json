@@ -60,15 +60,15 @@
           "dest-filename": "tutanota-unpacked-linux.tar.gz",
           "type": "file",
           "only-arches": ["x86_64"],
-          "sha256": "e4e6008aa39abe19ff816bc8f5662ff493736ca7add9132ed662a00c8e06bb8d",
-          "url": "https://github.com/tutao/tutanota/releases/download/tutanota-desktop-release-355.260710.0/tutanota-desktop-355.260710.0-unpacked-linux.tar.gz"
+          "sha256": "dbeac5b2e01c7d8138e62be2bf4e8fb4796562de4a418761da1acaf06079855c",
+          "url": "https://github.com/tutao/tutanota/releases/download/tutanota-desktop-release-356.260805.0/tutanota-desktop-356.260805.0-unpacked-linux.tar.gz"
         },
         {
           "dest-filename": "tutanota-unpacked-linux.tar.gz",
           "type": "file",
           "only-arches": ["aarch64"],
-          "sha256": "1a8349adc7094984b633aa43362f5e13e876df892fb4773245dcecfd139039d9",
-          "url": "https://github.com/nico359/tutanota-arm64/releases/download/356.260731.0/tutanota-desktop-356.260731.0-unpacked-linux-arm64.tar.gz"
+          "sha256": "b7cbce1985978d10576a589b048236f74398db6463290b1d22bffb9acba1e870",
+          "url": "https://github.com/nico359/tutanota-arm64/releases/download/356.260805.0/tutanota-desktop-356.260805.0-unpacked-linux-arm64.tar.gz"
         },
         {
           "type": "script",
