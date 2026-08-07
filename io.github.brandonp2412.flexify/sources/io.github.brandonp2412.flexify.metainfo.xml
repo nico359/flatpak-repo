@@ -50,6 +50,14 @@
   </screenshots>
 
 <releases>
+    <release version="2.1.107" date="2026-08-06">
+      <description translate="no">
+        <p>Update</p>
+        <ul>
+          <li>See upstream for relevant changes</li>
+        </ul>
+      </description>
+    </release>
   <release version="2.1.104" date="2026-07-31">
       <description translate="no">
         <p>Update</p>
