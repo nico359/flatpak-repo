@@ -1,6 +1,6 @@
 --- a/lib/src/hook/assets.dart
 +++ b/lib/src/hook/assets.dart
-@@ -123,7 +123,7 @@
+@@ -124,7 +124,7 @@
    /// this library.
    ///
    /// There's a test asserting that this is unique for all valid values.

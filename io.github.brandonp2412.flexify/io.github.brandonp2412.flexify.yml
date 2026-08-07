@@ -37,6 +37,8 @@ modules:
     build-commands:
       - setup-flutter.sh
       - flutter build linux --release --no-pub
+      - cp .dart_tool/hooks_runner/shared/sqlite3/build/download-static/libsqlite3.so
+        $BUNDLE_PATH/lib/ || true
       - install -D $BUNDLE_PATH/flexify /app/bin/flexify
       - cp -r $BUNDLE_PATH/lib /app/bin/lib
       - cp -r $BUNDLE_PATH/data /app/bin/data
@@ -46,11 +48,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/brandonp2412/Flexify.git
-        tag: 2.1.104
-        commit: c946371c51a74ef901d9c032ed92b5ae5711cc19
+        tag: 2.1.107
+        commit: ae86a3d72b8c52dd834b2202b76ac5951b4e6083
       - generated/sources/pubspec.json
       - type: dir
         path: sources
       - generated/sources/pubspec.json
     modules:
-      - generated/modules/flutter-sdk-3.44.6.json
+      - generated/modules/flutter-sdk-3.44.8.json
