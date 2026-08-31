@@ -48,8 +48,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/brandonp2412/Flexify.git
-        tag: 2.1.107
-        commit: ae86a3d72b8c52dd834b2202b76ac5951b4e6083
+        tag: 2.1.116
+        commit: 65e6cc5c01a4bc3c1b9ee4244d39f5a9808e308c
       - generated/sources/pubspec.json
       - type: dir
         path: sources

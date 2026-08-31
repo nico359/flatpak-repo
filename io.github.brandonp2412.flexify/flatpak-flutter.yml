@@ -38,7 +38,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/brandonp2412/Flexify.git
-        tag: 2.1.107
+        tag: 2.1.116
       - generated/sources/pubspec.json
       - type: dir
         path: sources
