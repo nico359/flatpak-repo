@@ -66,6 +66,12 @@
     <url type="donation">https://tuta.com/community#donate</url>
     <content_rating type="oars-1.1"/>
   
+  <recommends>
+    <display_length compare="ge">360</display_length>
+    <control>touch</control>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
   <supports>
     <control>touch</control>
     <control>keyboard</control>
@@ -73,6 +79,39 @@
   </supports>
     
     <releases>
+      <release version="357.260824.2" date="2026-08-28">
+        <description>
+	  <p>
+	    x86_64 version is behind again (you should not use it anyway) because no tarball seems to have been published. The release note below also doesnt exist as of now but the release itself is on GitHub.
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-357.260824.2
+	  </p>
+        </description>
+      </release>
+      <release version="357.260812.1" date="2026-08-13">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-357.260812.1
+	  </p>
+        </description>
+      </release>
+      <release version="356.260807.0" date="2026-08-07">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-356.260807.0
+	  </p>
+        </description>
+      </release>
+      <release version="356.260806.1" date="2026-08-07">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-356.260806.1
+	  </p>
+        </description>
+      </release>
       <release version="356.260805.0" date="2026-08-06">
         <description>
 	  <p>
