@@ -67,8 +67,8 @@
           "dest-filename": "tutanota-unpacked-linux.tar.gz",
           "type": "file",
           "only-arches": ["aarch64"],
-          "sha256": "bd079cce7fb33b1ab2c0b221bb6b8029cbff5827f2863361e66f95e2982f34a5",
-          "url": "https://github.com/nico359/tutanota-arm64/releases/download/tutanota-release-357.260824.2/tutanota-desktop-357.260824.2-unpacked-linux-arm64.tar.gz"
+          "sha256": "1bf90e93822c255516317eb6828be79510be1a23a75d74e5bcffc94121255457",
+          "url": "https://github.com/nico359/tutanota-arm64/releases/download/tutanota-release-357.260812.1/tutanota-desktop-357.260812.1-unpacked-linux-arm64.tar.gz"
         },
         {
           "type": "script",
