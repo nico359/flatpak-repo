@@ -82,7 +82,7 @@ jobs:
     permissions:
       contents: write
     container:
-      image: ghcr.io/andyholmes/flatter/gnome-rust:49
+      image: ghcr.io/andyholmes/flatter/gnome:master
       options: --privileged
 
     strategy:
@@ -120,8 +120,10 @@ jobs:
         if: ${{ needs.matrix.outputs.need-gnome == 'true' }}
         run: |
           flatpak install -y flathub \
-            org.gnome.Platform//50 \
-            org.gnome.Sdk//50
+            org.gnome.Platform//51 \
+            org.gnome.Sdk//51 \
+            org.freedesktop.Sdk//26.08 \
+            org.freedesktop.Sdk.Extension.rust-stable//26.08
 
       - name: Install Freedesktop runtimes
         if: ${{ needs.matrix.outputs.need-freedesktop == 'true' }}
