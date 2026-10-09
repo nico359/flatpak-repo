@@ -19,6 +19,7 @@ finish-args:
   - --socket=wayland
   - --socket=pulseaudio
   - --device=dri
+  - --filesystem=xdg-documents/flexify.sqlite
 modules:
   - name: flexify
     buildsystem: simple
