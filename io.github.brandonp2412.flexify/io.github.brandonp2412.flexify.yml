@@ -18,7 +18,6 @@ finish-args:
   - --socket=fallback-x11
   - --socket=wayland
   - --device=dri
-  - --filesystem=home
 modules:
   - name: flexify
     buildsystem: simple
