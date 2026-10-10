@@ -68,9 +68,6 @@
   
   <recommends>
     <display_length compare="ge">360</display_length>
-    <control>touch</control>
-    <control>keyboard</control>
-    <control>pointing</control>
   </recommends>
   <supports>
     <control>touch</control>
@@ -79,6 +76,30 @@
   </supports>
     
     <releases>
+      <release version="360.260922.0" date="2026-09-28">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-360.260922.0
+	  </p>
+        </description>
+      </release>
+      <release version="360.260921.0" date="2026-09-21">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-360.260921.0
+	  </p>
+        </description>
+      </release>
+      <release version="360.260917.0" date="2026-09-21">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-360.260917.0
+	  </p>
+        </description>
+      </release>
       <release version="359.260904.0" date="2026-09-08">
         <description>
 	  <p>
