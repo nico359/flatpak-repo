@@ -17,8 +17,9 @@ finish-args:
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
+  - --socket=pulseaudio
   - --device=dri
-  - --filesystem=home
+  - --filesystem=xdg-documents/flexify.sqlite
 modules:
   - name: flexify
     buildsystem: simple
