@@ -1,7 +1,7 @@
 {
     "id" : "io.github.nico359.pinepal",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "50",
+    "runtime-version" : "51",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -27,7 +27,8 @@
         ],
         "env" : {
             "CARGO_HOME" : "/run/build/pinepal/cargo",
-            "RUST_BACKTRACE" : "1"
+            "RUST_BACKTRACE" : "1",
+            "AWS_LC_SYS_NO_JITTER_ENTROPY" : "1"
         }
     },
     "cleanup" : [
