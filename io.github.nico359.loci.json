@@ -1,7 +1,7 @@
 {
     "id" : "io.github.nico359.loci",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "50",
+    "runtime-version" : "51",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -21,6 +21,7 @@
             "--share=network"
         ],
         "env" : {
+            "CARGO_HOME" : "/run/build/loci/cargo",
             "RUST_BACKTRACE" : "1"
         }
     },
@@ -61,8 +62,8 @@
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.gnome.org/sources/libshumate/1.6/libshumate-1.6.1.tar.xz",
-                    "sha256" : "b36aad34500791785f546684d0f2ed644e4819ff4e85ae67a2245f159eccb2d4"
+                    "url" : "https://download.gnome.org/sources/libshumate/1.7/libshumate-1.7.0.tar.xz",
+                    "sha256" : "3896cc4b6a7bf83141c27df23ce48cdd68467603bc6b764960307cdcbbef80e5"
                 }
             ]
         },
@@ -77,7 +78,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/loci.git",
-                    "tag" : "v0.3.1"
+                    "tag" : "v0.4.0"
                 }
             ]
         }
