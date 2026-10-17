@@ -1,7 +1,7 @@
 {
     "id" : "io.github.nico359.expenses",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "50",
+    "runtime-version" : "51",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -38,12 +38,15 @@
             "name" : "expenses",
             "builddir" : true,
             "buildsystem" : "meson",
-            "config-opts" : ["-Dbuildtype=release"],
+            "config-opts" : [
+                "-Dbuildtype=release",
+                "--libdir=lib"
+            ],
             "sources" : [
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/expenses.git",
-                    "tag" : "v1.3.1"
+                    "tag" : "v1.3.2"
                 }
             ]
         }
