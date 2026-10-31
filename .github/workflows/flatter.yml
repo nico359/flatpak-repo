@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       apps:
-        description: 'Apps to build (comma-separated: expenses,loci,pinepal,simplesync,speedometer,flexify,tutanota or "all")'
+        description: 'Apps to build (comma-separated: expenses,loci,pinepal,simplesync,speedometer,camera,flexify,tutanota or "all")'
         required: true
         type: string
         default: 'all'
@@ -31,13 +31,14 @@ jobs:
               pinepal)     echo 'io.github.nico359.pinepal.json' ;;
               simplesync)  echo 'io.github.nico359.simplesync.json' ;;
               speedometer) echo 'io.github.nico359.speedometer.json' ;;
+              camera)      echo 'io.github.nico359.camera.json' ;;
               flexify)     echo 'io.github.brandonp2412.flexify/io.github.brandonp2412.flexify.yml' ;;
               tutanota)    echo 'com.tutanota.Tutanota/com.tutanota.Tutanota.json' ;;
             esac
           }
 
           INPUT="${{ inputs.apps }}"
-          ALL="expenses loci pinepal simplesync speedometer flexify tutanota"
+          ALL="expenses loci pinepal simplesync speedometer camera flexify tutanota"
 
           if [ "${INPUT}" = "all" ]; then
             NAMES="${ALL}"
@@ -57,7 +58,7 @@ jobs:
               echo "${path}" >> $GITHUB_OUTPUT
             fi
             case "${name}" in
-              expenses|loci|pinepal|simplesync|speedometer)
+              expenses|loci|pinepal|simplesync|speedometer|camera)
                 NEED_GNOME=true ;;
               flexify)
                 NEED_FREEDESKTOP=true

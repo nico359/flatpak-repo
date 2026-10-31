@@ -8,6 +8,7 @@ Included as of now are:
 - SimpleSync: Very simple app to push/pull or sync local folders such as photos to a WebDAV instance like Nextcloud
 - PinePal: Pinetime companion app. The main connection logic is borrowed/stolen from Watchmate but it should be a lot more reliable
 - Speedometer: Simple speedometer app that displays speed in kmh or mph
+- Camera: GTK4 camera app for FuriOS/FuriPhone using FuriCam's Camera2 engine. It builds in CI, but only runs on Halium-based devices.
 - Loci: Turn-by-turn navigation app using libshumate tile renderer (like Gnome Maps) - very early development,
 
 Apps not created by me:
