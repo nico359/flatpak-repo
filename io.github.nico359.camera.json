@@ -53,7 +53,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/camera.git",
-                    "tag" : "v0.2.0"
+                    "tag" : "v0.3.0"
                 }
             ]
         }
