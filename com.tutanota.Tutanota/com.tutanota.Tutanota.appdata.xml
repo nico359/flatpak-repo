@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
     <id type="desktop">com.tutanota.Tutanota</id>
@@ -76,6 +77,46 @@
   </supports>
     
     <releases>
+      <release version="368.261109.0" date="2026-11-10">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-368.261109.0
+	  </p>
+        </description>
+      </release>
+      <release version="366.261105.0" date="2026-11-06">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-366.261105.0
+	  </p>
+        </description>
+      </release>
+      <release version="365.261103.0" date="2026-11-04">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-365.261103.0
+	  </p>
+        </description>
+      </release>
+      <release version="365.261103.0" date="2026-11-04">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-365.261103.0
+	  </p>
+        </description>
+        </release>
+        <release version="365.261030.0" date="2026-11-04">
+        <description>
+	  <p>
+	    Check out the release notes on GitHub:
+        https://github.com/tutao/tutanota/releases/tutanota-desktop-release-365.261030.0
+	  </p>
+        </description>
+      </release>
       <release version="360.260922.0" date="2026-09-28">
         <description>
 	  <p>
