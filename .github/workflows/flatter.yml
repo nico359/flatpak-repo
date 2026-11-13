@@ -16,7 +16,9 @@ jobs:
     name: Select apps
     runs-on: ubuntu-latest
     outputs:
-      files: ${{ steps.set.outputs.files }}
+      matrix: ${{ steps.set.outputs.matrix }}
+      files-x86_64: ${{ steps.set.outputs.files-x86_64 }}
+      files-aarch64: ${{ steps.set.outputs.files-aarch64 }}
       need-gnome: ${{ steps.set.outputs.need-gnome }}
       need-freedesktop: ${{ steps.set.outputs.need-freedesktop }}
       need-llvm21: ${{ steps.set.outputs.need-llvm21 }}
@@ -51,11 +53,18 @@ jobs:
           NEED_LLVM21=false
           NEED_ELECTRON=false
 
-          echo "files<<EOF" >> $GITHUB_OUTPUT
+          FILES_X86_64=""
+          FILES_AARCH64=""
+
           for name in ${NAMES}; do
             path=$(get_path "${name}")
             if [ -n "${path}" ]; then
-              echo "${path}" >> $GITHUB_OUTPUT
+              # Tutanota is only published for aarch64; skip the redundant
+              # x86_64 build so it does not bloat the repository.
+              if [ "${name}" != "tutanota" ]; then
+                FILES_X86_64="${FILES_X86_64}${path}"$'\n'
+              fi
+              FILES_AARCH64="${FILES_AARCH64}${path}"$'\n'
             fi
             case "${name}" in
               expenses|loci|pinepal|simplesync|speedometer|camera)
@@ -69,7 +78,27 @@ jobs:
                 NEED_ELECTRON=true ;;
             esac
           done
-          echo "EOF" >> $GITHUB_OUTPUT
+
+          if [ -z "${FILES_AARCH64}" ]; then
+            echo "No valid apps selected in '${INPUT}'" >&2
+            exit 1
+          fi
+
+          emit_files() {
+            echo "$1<<EOF" >> "$GITHUB_OUTPUT"
+            printf '%s' "$2" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          }
+          emit_files files-x86_64 "${FILES_X86_64}"
+          emit_files files-aarch64 "${FILES_AARCH64}"
+
+          # Only schedule architectures that actually have manifests.
+          MATRIX=""
+          if [ -n "${FILES_X86_64}" ]; then
+            MATRIX='{"arch":"x86_64"},'
+          fi
+          MATRIX="${MATRIX}{\"arch\":\"aarch64\"}"
+          echo "matrix=[${MATRIX}]" >> "$GITHUB_OUTPUT"
 
           echo "need-gnome=${NEED_GNOME}" >> $GITHUB_OUTPUT
           echo "need-freedesktop=${NEED_FREEDESKTOP}" >> $GITHUB_OUTPUT
@@ -88,7 +117,7 @@ jobs:
 
     strategy:
       matrix:
-        arch: [x86_64, aarch64]
+        include: ${{ fromJSON(needs.matrix.outputs.matrix) }}
       fail-fast: false
       max-parallel: 1
 
@@ -156,12 +185,16 @@ jobs:
       - name: Prune old versions
         run: |
           mkdir -p repo/refs/remotes
+          # Tutanota is aarch64-only now; drop any x86_64 ref left over from
+          # earlier builds so its objects get pruned instead of lingering in the
+          # published repository forever.
+          ostree --repo=repo refs --delete app/com.tutanota.Tutanota/x86_64/master 2>/dev/null || true
           ostree prune --repo=repo --refs-only --depth=2
 
       - name: Build
         uses: andyholmes/flatter@main
         with:
-          files: ${{ needs.matrix.outputs.files }}
+          files: ${{ matrix.arch == 'aarch64' && needs.matrix.outputs.files-aarch64 || needs.matrix.outputs.files-x86_64 }}
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
