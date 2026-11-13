@@ -17,6 +17,7 @@
         "--system-talk-name=com.nokia.SensorService",
         "--filesystem=xdg-pictures/Camera:create",
         "--filesystem=xdg-videos/Camera:create",
+        "--filesystem=xdg-data/Trash:create",
         "--env=HYBRIS_LD_LIBRARY_PATH=/system/lib64:/vendor/lib64:/odm/lib64"
     ],
     "build-options" : {
@@ -53,7 +54,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/camera.git",
-                    "tag" : "v0.4.0"
+                    "tag" : "v0.5.0"
                 }
             ]
         }
