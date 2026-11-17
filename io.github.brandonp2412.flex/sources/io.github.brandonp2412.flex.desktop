@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=Flexify
+Name=Flex
 Comment=Track your gym progress
-Exec=flexify
-Icon=io.github.brandonp2412.flexify
+Exec=flex
+Icon=io.github.brandonp2412.flex
 Terminal=false
 Categories=Utility;

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.brandonp2412.flexify</id>
+  <id>io.github.brandonp2412.flex</id>
   <content_rating type="oars-1.0" />
     
 <developer id="com.github.brandonp2412">
   <name>Brandon Dick</name>
 </developer>
   
-  <name>Flexify</name>
-  <summary>Track your gym progress and flex on people </summary>
+  <name>Flex</name>
+  <summary>Track your gym progress and flex on people</summary>
   
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
   
-  <url type="homepage">https://github.com/brandonp2412/Flexify</url>
-  <url type="vcs-browser">https://github.com/brandonp2412/Flexify</url>
-  <url type="bugtracker">https://github.com/brandonp2412/Flexify/issues</url>
+  <url type="homepage">https://github.com/brandonp2412/Flex</url>
+  <url type="vcs-browser">https://github.com/brandonp2412/Flex</url>
+  <url type="bugtracker">https://github.com/brandonp2412/Flex/issues</url>
 
   <recommends>
     <display_length compare="ge">360</display_length>
@@ -36,23 +36,31 @@
     </p>
   </description>
   
-  <launchable type="desktop-id">io.github.brandonp2412.flexify.desktop</launchable>
+  <launchable type="desktop-id">io.github.brandonp2412.flex.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <caption>Android screenshot 1</caption>
-      <image>https://raw.githubusercontent.com/brandonp2412/Flexify/refs/heads/main/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png</image>
+      <image>https://raw.githubusercontent.com/brandonp2412/Flex/refs/heads/main/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png</image>
     </screenshot>
     <screenshot>
       <caption>Android screenshot 2</caption>
-      <image>https://raw.githubusercontent.com/brandonp2412/Flexify/refs/heads/main/fastlane/metadata/android/en-US/images/phoneScreenshots/5_en-US.png</image>
+      <image>https://raw.githubusercontent.com/brandonp2412/Flex/refs/heads/main/fastlane/metadata/android/en-US/images/phoneScreenshots/5_en-US.png</image>
     </screenshot>
     <screenshot>
       <caption>Android screenshot 3</caption>
-      <image>https://raw.githubusercontent.com/brandonp2412/Flexify/refs/heads/main/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.png</image>
+      <image>https://raw.githubusercontent.com/brandonp2412/Flex/refs/heads/main/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.png</image>
     </screenshot>
   </screenshots>
 
 <releases>
+    <release version="2.2.47" date="2026-11-16">
+      <description translate="no">
+        <p>Update</p>
+        <ul>
+          <li>See upstream for relevant changes</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.2.34" date="2026-10-12">
       <description translate="no">
         <p>Update</p>
@@ -70,14 +78,6 @@
       </description>
     </release>
   <release version="2.1.104" date="2026-07-31">
-      <description translate="no">
-        <p>Update</p>
-        <ul>
-          <li>See upstream for relevant changes</li>
-        </ul>
-      </description>
-    </release>
-  <release version="2.1.82" date="2026-06-01">
       <description translate="no">
         <p>Update</p>
         <ul>

@@ -6,10 +6,15 @@ on:
   workflow_dispatch:
     inputs:
       apps:
-        description: 'Apps to build (comma-separated: expenses,loci,pinepal,simplesync,speedometer,camera,flexify,tutanota or "all")'
+        description: 'Apps to build (comma-separated: expenses,loci,pinepal,simplesync,speedometer,camera,flex,tutanota or "all")'
         required: true
         type: string
         default: 'all'
+      mark_eol:
+        description: 'One-shot: mark the old io.github.brandonp2412.flexify refs end-of-life (rebases users to io.github.brandonp2412.flex)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   matrix:
@@ -34,13 +39,13 @@ jobs:
               simplesync)  echo 'io.github.nico359.simplesync.json' ;;
               speedometer) echo 'io.github.nico359.speedometer.json' ;;
               camera)      echo 'io.github.nico359.camera.json' ;;
-              flexify)     echo 'io.github.brandonp2412.flexify/io.github.brandonp2412.flexify.yml' ;;
+              flex)        echo 'io.github.brandonp2412.flex/io.github.brandonp2412.flex.yml' ;;
               tutanota)    echo 'com.tutanota.Tutanota/com.tutanota.Tutanota.json' ;;
             esac
           }
 
           INPUT="${{ inputs.apps }}"
-          ALL="expenses loci pinepal simplesync speedometer camera flexify tutanota"
+          ALL="expenses loci pinepal simplesync speedometer camera flex tutanota"
 
           if [ "${INPUT}" = "all" ]; then
             NAMES="${ALL}"
@@ -69,7 +74,7 @@ jobs:
             case "${name}" in
               expenses|loci|pinepal|simplesync|speedometer|camera)
                 NEED_GNOME=true ;;
-              flexify)
+              flex)
                 NEED_FREEDESKTOP=true
                 NEED_LLVM21=true ;;
               tutanota)
@@ -190,6 +195,27 @@ jobs:
           # published repository forever.
           ostree --repo=repo refs --delete app/com.tutanota.Tutanota/x86_64/master 2>/dev/null || true
           ostree prune --repo=repo --refs-only --depth=2
+
+      - name: Mark old Flexify refs end-of-life
+        # One-shot: set mark_eol when triggering the workflow, then leave it off.
+        # Clients with io.github.brandonp2412.flexify will be offered a rebase to
+        # io.github.brandonp2412.flex, preserving their app data.
+        if: ${{ inputs.mark_eol && matrix.arch == 'aarch64' && steps.gpg.outputs.fingerprint != '' }}
+        run: |
+          for arch in x86_64 aarch64; do
+            ref="app/io.github.brandonp2412.flexify/${arch}/master"
+            if ! ostree --repo=repo rev-parse "$ref" >/dev/null 2>&1; then
+              echo "$ref not present, skipping"
+              continue
+            fi
+            flatpak build-commit-from \
+              --src-ref="$ref" \
+              --end-of-life="Renamed to io.github.brandonp2412.flex" \
+              --end-of-life-rebase=io.github.brandonp2412.flexify=io.github.brandonp2412.flex \
+              --gpg-sign="${{ steps.gpg.outputs.fingerprint }}" \
+              --no-update-summary \
+              repo "$ref"
+          done
 
       - name: Build
         uses: andyholmes/flatter@main
