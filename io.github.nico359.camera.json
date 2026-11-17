@@ -43,9 +43,60 @@
     ],
     "modules" : [
         {
+            "name" : "opencv",
+            "builddir" : true,
+            "buildsystem" : "cmake-ninja",
+            "config-opts" : [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+                "-DBUILD_LIST=core,imgproc,photo,imgcodecs",
+                "-DBUILD_SHARED_LIBS=ON",
+                "-DBUILD_TESTS=OFF",
+                "-DBUILD_PERF_TESTS=OFF",
+                "-DBUILD_EXAMPLES=OFF",
+                "-DBUILD_opencv_apps=OFF",
+                "-DBUILD_opencv_python2=OFF",
+                "-DBUILD_opencv_python3=OFF",
+                "-DBUILD_JAVA=OFF",
+                "-DBUILD_opencv_ts=OFF",
+                "-DOPENCV_GENERATE_PKGCONFIG=OFF",
+                "-DWITH_OPENCL=OFF",
+                "-DWITH_IPP=OFF",
+                "-DWITH_TBB=OFF",
+                "-DWITH_OPENMP=OFF",
+                "-DWITH_FFMPEG=OFF",
+                "-DWITH_GSTREAMER=OFF",
+                "-DWITH_V4L=OFF",
+                "-DWITH_GTK=OFF",
+                "-DWITH_QT=OFF",
+                "-DWITH_JPEG=ON",
+                "-DBUILD_JPEG=OFF",
+                "-DWITH_PNG=OFF",
+                "-DWITH_TIFF=OFF",
+                "-DWITH_WEBP=OFF",
+                "-DWITH_OPENEXR=OFF",
+                "-DWITH_ZLIB=ON",
+                "-DBUILD_ZLIB=OFF",
+                "-DENABLE_PRECOMPILED_HEADERS=OFF"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://github.com/opencv/opencv/archive/refs/tags/4.10.0.tar.gz",
+                    "sha256" : "b2171af5be6b26f7a06b1229948bbb2bdaa74fcf5cd097e0af6378fce50a6eb9"
+                }
+            ]
+        },
+        {
             "name" : "camera",
             "builddir" : true,
             "buildsystem" : "meson",
+            "build-options" : {
+                "env" : {
+                    "OPENCV_INCLUDE_DIR" : "/app/include/opencv4",
+                    "OPENCV_LIB_DIR" : "/app/lib"
+                }
+            },
             "config-opts" : [
                 "-Dbuildtype=release",
                 "-Dcamera2=true"
@@ -54,7 +105,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/nico359/camera.git",
-                    "tag" : "v0.5.1"
+                    "tag" : "v0.6.0"
                 }
             ]
         }
