@@ -222,6 +222,10 @@ jobs:
         with:
           files: ${{ matrix.arch == 'aarch64' && needs.matrix.outputs.files-aarch64 || needs.matrix.outputs.files-x86_64 }}
           arch: ${{ matrix.arch }}
+          # The repo-cache branch already persists the repository. Flatter's
+          # Actions cache restores an older copy of ./repo inside the build
+          # action, which overwrites ref changes made before it (e.g. EOL marks).
+          cache-key: ''
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
