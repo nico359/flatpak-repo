@@ -23,6 +23,8 @@ modules:
   - name: flex
     buildsystem: simple
     build-options:
+      build-args:
+        - --share=network
       arch:
         x86_64:
           env:
